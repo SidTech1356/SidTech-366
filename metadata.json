@@ -1,0 +1,8 @@
+{
+  "name": "SIDTECH - Franchise & Project Delivery System",
+  "description": "SIDTECH Enterprise High-Performance Franchise Branch Network, Digital Services Ecosystem, Project Lifecycle & Verification Engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

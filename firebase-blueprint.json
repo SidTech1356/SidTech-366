@@ -1,0 +1,186 @@
+{
+  "entities": {
+    "Franchise": {
+      "title": "Franchise",
+      "description": "SidTech authorized franchise branch profile and credentials",
+      "type": "object",
+      "properties": {
+        "franchiseId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "mobile": { "type": "string" },
+        "branchName": { "type": "string" },
+        "address": { "type": "string" },
+        "password": { "type": "string" },
+        "passwordHash": { "type": "string" },
+        "tPin": { "type": "string" },
+        "tPinHash": { "type": "string" },
+        "tPinSet": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected", "Suspended"] },
+        "rejectionReason": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "registeredOn": { "type": "string" },
+        "approvedOn": { "type": "string" },
+        "walletBalance": { "type": "number" },
+        "totalEarned": { "type": "number" },
+        "totalWithdrawn": { "type": "number" }
+      },
+      "required": ["franchiseId", "name", "email", "mobile", "branchName", "status", "walletBalance"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Catalog of digital services with pricing, advance deposit %, and franchise commission %",
+      "type": "object",
+      "properties": {
+        "serviceId": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "advancePercent": { "type": "number" },
+        "commissionPercent": { "type": "number" },
+        "category": { "type": "string", "enum": ["Website", "App", "Software", "ERP", "Other"] },
+        "imageUrl": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["serviceId", "serviceName", "price", "advancePercent", "commissionPercent", "category", "active"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Client software project orders booked by franchise branches and fulfilled by SidTech",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "franchiseId": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientMobile": { "type": "string" },
+        "requirementNotes": { "type": "string" },
+        "finalPrice": { "type": "number" },
+        "advancePercent": { "type": "number" },
+        "advanceRequired": { "type": "number" },
+        "amountPaid": { "type": "number" },
+        "amountDue": { "type": "number" },
+        "status": { "type": "string", "enum": ["New", "Accepted", "Processing", "DemoReady", "Delivered", "Rejected"] },
+        "statusColor": { "type": "string" },
+        "demoUrl": { "type": "string" },
+        "finalUrl": { "type": "string" },
+        "commissionPercent": { "type": "number" },
+        "commissionAmount": { "type": "number" },
+        "createdOn": { "type": "string" },
+        "acceptedOn": { "type": "string" },
+        "deliveredOn": { "type": "string" },
+        "certificateNumber": { "type": "string" },
+        "rejectionReason": { "type": "string" }
+      },
+      "required": ["projectId", "franchiseId", "serviceName", "clientName", "clientMobile", "finalPrice", "status"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "UPI / Bank UTR payment submissions and verification ledger",
+      "type": "object",
+      "properties": {
+        "paymentId": { "type": "string" },
+        "projectId": { "type": "string" },
+        "franchiseId": { "type": "string" },
+        "franchiseName": { "type": "string" },
+        "amount": { "type": "number" },
+        "mode": { "type": "string" },
+        "utr": { "type": "string" },
+        "status": { "type": "string", "enum": ["Submitted", "Verified", "Rejected"] },
+        "submittedOn": { "type": "string" },
+        "verifiedOn": { "type": "string" },
+        "verifiedBy": { "type": "string" },
+        "rejectionReason": { "type": "string" }
+      },
+      "required": ["paymentId", "projectId", "franchiseId", "amount", "utr", "status", "submittedOn"]
+    },
+    "Payout": {
+      "title": "Payout",
+      "description": "Commission withdrawal requests and settlement records",
+      "type": "object",
+      "properties": {
+        "payoutId": { "type": "string" },
+        "franchiseId": { "type": "string" },
+        "franchiseName": { "type": "string" },
+        "amount": { "type": "number" },
+        "walletBalanceAtRequest": { "type": "number" },
+        "status": { "type": "string", "enum": ["Requested", "Processing", "Paid", "Rejected"] },
+        "mode": { "type": "string" },
+        "requestedOn": { "type": "string" },
+        "processedOn": { "type": "string" },
+        "referenceNote": { "type": "string" },
+        "rejectionReason": { "type": "string" },
+        "upiId": { "type": "string" }
+      },
+      "required": ["payoutId", "franchiseId", "amount", "status", "requestedOn"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Enterprise application settings, UPI ID, default commission rates, and digital seals",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "companyUpi": { "type": "string" },
+        "companyQrImageUrl": { "type": "string" },
+        "defaultAdvancePercent": { "type": "number" },
+        "defaultCommissionPercent": { "type": "number" },
+        "certificatePrefix": { "type": "string" },
+        "adminUsername": { "type": "string" },
+        "adminPassword": { "type": "string" },
+        "adminPasswordHash": { "type": "string" },
+        "supportEmail": { "type": "string" },
+        "supportPhone": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "ownerDesignation": { "type": "string" },
+        "ownerSignatureUrl": { "type": "string" },
+        "digitalStampUrl": { "type": "string" }
+      }
+    },
+    "NotificationItem": {
+      "title": "NotificationItem",
+      "description": "System and project lifecycle notification alerts",
+      "type": "object",
+      "properties": {
+        "notifId": { "type": "string" },
+        "franchiseId": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdOn": { "type": "string" },
+        "targetId": { "type": "string" }
+      },
+      "required": ["notifId", "message", "type", "read", "createdOn"]
+    }
+  },
+  "firestore": {
+    "/franchises/{franchiseId}": {
+      "schema": "Franchise",
+      "description": "Franchise accounts and profiles"
+    },
+    "/services/{serviceId}": {
+      "schema": "Service",
+      "description": "Catalog of services"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Project orders"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Submitted and verified payment ledger"
+    },
+    "/payouts/{payoutId}": {
+      "schema": "Payout",
+      "description": "Commission withdrawal requests"
+    },
+    "/settings/{settingsDocId}": {
+      "schema": "Settings",
+      "description": "Global enterprise configuration"
+    },
+    "/notifications/{notifId}": {
+      "schema": "NotificationItem",
+      "description": "Notification records"
+    }
+  }
+}
